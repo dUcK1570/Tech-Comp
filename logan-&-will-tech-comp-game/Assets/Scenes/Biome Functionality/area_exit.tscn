@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://hpdfo2acn727"]
+
+[ext_resource type="Texture2D" uid="uid://wf65afnvg0lv" path="res://Assets/Sprites/pixilart-drawing.png" id="1_gveol"]
+[ext_resource type="Script" uid="uid://k2kkuropi3do" path="res://Assets/Scripts/area_exit.gd" id="1_whob1"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_whob1"]
+radius = 20.0
+height = 46.0
+
+[node name="Area_exit" type="Area2D"]
+collision_layer = 65536
+collision_mask = 2
+script = ExtResource("1_whob1")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = -10
+position = Vector2(0, -50)
+scale = Vector2(1, 1.00251)
+texture = ExtResource("1_gveol")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2, -23)
+shape = SubResource("CapsuleShape2D_whob1")
+one_way_collision_margin = 0.0
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

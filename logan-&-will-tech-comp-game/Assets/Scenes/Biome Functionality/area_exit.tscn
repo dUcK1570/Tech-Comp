@@ -8,7 +8,7 @@ radius = 20.0
 height = 46.0
 
 [node name="Area_exit" type="Area2D"]
-collision_layer = 65536
+collision_layer = 65537
 collision_mask = 2
 script = ExtResource("1_whob1")
 
@@ -23,4 +23,4 @@ position = Vector2(2, -23)
 shape = SubResource("CapsuleShape2D_whob1")
 one_way_collision_margin = 0.0
 
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_entered" from="." to="." method="_on_Area_exit_entered"]

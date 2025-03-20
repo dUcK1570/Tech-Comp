@@ -1,21 +1,30 @@
-[gd_scene load_steps=4 format=3 uid="uid://c2shfrdn1qhv5"]
+[gd_scene load_steps=8 format=3 uid="uid://c2shfrdn1qhv5"]
 
 [ext_resource type="Texture2D" uid="uid://5016njrev5qi" path="res://Assets/Sprites/Person.png" id="1_3e2tf"]
 [ext_resource type="Script" uid="uid://bj11e55qauhe5" path="res://Assets/Scenes/player_controller.gd" id="1_b2ifw"]
+[ext_resource type="PackedScene" uid="uid://bh75s6sk7bn7e" path="res://Assets/Scenes/Biome Functionality/HealthBar.tscn" id="3_aee6e"]
+[ext_resource type="PackedScene" uid="uid://bxv0m2g4lk17h" path="res://Assets/Scenes/Biome Functionality/stam_bar.tscn" id="4_e5q2x"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_b2ifw"]
 radius = 6.0
 height = 14.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b2ifw"]
+size = Vector2(24.197, 10.2317)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_aee6e"]
+radius = 6.0
+height = 14.0
+
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
-collision_mask = 65537
+collision_mask = 65553
 script = ExtResource("1_b2ifw")
-speed = 8.0
+speed = 6.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2(0, -10)
-zoom = Vector2(4.5, 4.5)
+zoom = Vector2(5, 5)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-0.06, -7.5)
@@ -27,3 +36,55 @@ texture = ExtResource("1_3e2tf")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -7)
 shape = SubResource("CapsuleShape2D_b2ifw")
+
+[node name="dealDamageZone" type="Area2D" parent="."]
+
+[node name="damagecollision" type="CollisionShape2D" parent="dealDamageZone"]
+position = Vector2(14, -10)
+rotation = -0.436332
+shape = SubResource("RectangleShape2D_b2ifw")
+disabled = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+
+[node name="PlayerHitbox" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerHitbox"]
+position = Vector2(0, -7)
+shape = SubResource("CapsuleShape2D_aee6e")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HealthBar" parent="CanvasLayer" instance=ExtResource("3_aee6e")]
+anchors_preset = -1
+anchor_left = 0.0138889
+anchor_top = 0.0308642
+anchor_right = 0.274306
+anchor_bottom = 0.0555556
+offset_right = 0.0
+offset_bottom = 0.0
+size_flags_horizontal = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="StamBar" parent="CanvasLayer" instance=ExtResource("4_e5q2x")]
+anchors_preset = -1
+anchor_left = 0.0138889
+anchor_top = 0.0941358
+anchor_right = 0.311632
+anchor_bottom = 0.118827
+offset_right = 0.0
+offset_bottom = 0.0
+metadata/_edit_use_anchors_ = true
+
+[node name="regen_timer" type="Timer" parent="."]
+wait_time = 3.5
+autostart = true
+
+[node name="stam_regen_timer" type="Timer" parent="."]
+wait_time = 4.5
+autostart = true
+
+[connection signal="timeout" from="regen_timer" to="." method="_on_regen_timer_timeout"]
+[connection signal="timeout" from="stam_regen_timer" to="." method="_on_stam_regen_timer_timeout"]

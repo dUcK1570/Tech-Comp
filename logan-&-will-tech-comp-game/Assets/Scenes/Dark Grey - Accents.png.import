@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://v3gxnwkjw2ux"
-path="res://.godot/imported/Slime Spritesheet.png-5ece7909ceabfdadf897cac9d8dab41e.ctex"
+uid="uid://cgbhgikk2apak"
+path="res://.godot/imported/Dark Grey - Accents.png-b89433d6d3587a8baecccd8e049a0e12.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Slime Spritesheet.png"
-dest_files=["res://.godot/imported/Slime Spritesheet.png-5ece7909ceabfdadf897cac9d8dab41e.ctex"]
+source_file="res://Assets/Scenes/Dark Grey - Accents.png"
+dest_files=["res://.godot/imported/Dark Grey - Accents.png-b89433d6d3587a8baecccd8e049a0e12.ctex"]
 
 [params]
 

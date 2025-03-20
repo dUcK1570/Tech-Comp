@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://v3gxnwkjw2ux"
-path="res://.godot/imported/Slime Spritesheet.png-5ece7909ceabfdadf897cac9d8dab41e.ctex"
+uid="uid://cqidsiq07t360"
+path="res://.godot/imported/Forest Green.png-e985f65ab46544e3fa106cbc2c9a5b2c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Slime Spritesheet.png"
-dest_files=["res://.godot/imported/Slime Spritesheet.png-5ece7909ceabfdadf897cac9d8dab41e.ctex"]
+source_file="res://Assets/Scenes/Forest Green.png"
+dest_files=["res://.godot/imported/Forest Green.png-e985f65ab46544e3fa106cbc2c9a5b2c.ctex"]
 
 [params]
 

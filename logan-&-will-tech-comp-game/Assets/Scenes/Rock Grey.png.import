@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://v3gxnwkjw2ux"
-path="res://.godot/imported/Slime Spritesheet.png-5ece7909ceabfdadf897cac9d8dab41e.ctex"
+uid="uid://2pd0cr4aq10o"
+path="res://.godot/imported/Rock Grey.png-34cf913544046171eaa53995284c0bf5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Slime Spritesheet.png"
-dest_files=["res://.godot/imported/Slime Spritesheet.png-5ece7909ceabfdadf897cac9d8dab41e.ctex"]
+source_file="res://Assets/Scenes/Rock Grey.png"
+dest_files=["res://.godot/imported/Rock Grey.png-34cf913544046171eaa53995284c0bf5.ctex"]
 
 [params]
 

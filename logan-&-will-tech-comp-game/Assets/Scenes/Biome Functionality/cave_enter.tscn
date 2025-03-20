@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://pycr6h4wkd6s"]
+
+[ext_resource type="Script" uid="uid://drlkvamigf3gc" path="res://Assets/Scripts/cave_enter.gd" id="1_2g4hi"]
+[ext_resource type="Texture2D" uid="uid://wf65afnvg0lv" path="res://Assets/Sprites/pixilart-drawing.png" id="1_e7c65"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2g4hi"]
+radius = 16.0
+height = 50.0
+
+[node name="CaveEnter" type="Area2D"]
+collision_layer = 65536
+collision_mask = 2
+script = ExtResource("1_2g4hi")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -50)
+texture = ExtResource("1_e7c65")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2, -26)
+shape = SubResource("CapsuleShape2D_2g4hi")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

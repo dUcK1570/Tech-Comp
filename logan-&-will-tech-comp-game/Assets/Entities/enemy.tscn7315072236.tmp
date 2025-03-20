@@ -1,8 +1,7 @@
-[gd_scene load_steps=38 format=3 uid="uid://mwx3s71xuea2"]
+[gd_scene load_steps=34 format=3 uid="uid://mwx3s71xuea2"]
 
 [ext_resource type="Script" uid="uid://b5aus4j0agh7u" path="res://Assets/Scripts/slime_enemy.gd" id="1_lim66"]
 [ext_resource type="Texture2D" uid="uid://v3gxnwkjw2ux" path="res://Assets/Sprites/Slime Spritesheet.png" id="1_ncgdw"]
-[ext_resource type="PackedScene" uid="uid://bh75s6sk7bn7e" path="res://Assets/Scenes/Biome Functionality/HealthBar.tscn" id="3_h8b60"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lim66"]
 atlas = ExtResource("1_ncgdw")
@@ -227,25 +226,16 @@ animations = [{
 radius = 89.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_odv7q"]
-radius = 6.0
-height = 18.0
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_lim66"]
-radius = 9.0
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_h8b60"]
-radius = 12.0
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_xct18"]
+radius = 8.0
+height = 16.0
 
 [node name="Enemy" type="CharacterBody2D"]
 position = Vector2(-1, 0)
-collision_mask = 17
 script = ExtResource("1_lim66")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_j35ob")
-animation = &"idle"
+animation = &"death"
 offset = Vector2(0, -9)
 
 [node name="Detection_Are" type="Area2D" parent="."]
@@ -264,39 +254,4 @@ shape = SubResource("CapsuleShape2D_odv7q")
 wait_time = 2.0
 autostart = true
 
-[node name="SlimeHitbox" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SlimeHitbox"]
-position = Vector2(1, -9)
-shape = SubResource("CircleShape2D_lim66")
-
-[node name="SlimeDealDamageZone" type="Area2D" parent="."]
-collision_layer = 4
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SlimeDealDamageZone"]
-position = Vector2(1, -9)
-shape = SubResource("CircleShape2D_h8b60")
-
-[node name="Too_Close" type="Area2D" parent="."]
-collision_layer = 4
-collision_mask = 10
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Too_Close"]
-position = Vector2(1, -9)
-shape = SubResource("CircleShape2D_xct18")
-
-[node name="HealthBar" parent="." instance=ExtResource("3_h8b60")]
-offset_left = -13.0
-offset_top = -24.0
-offset_right = 15.0
-offset_bottom = -22.0
-
-[connection signal="body_entered" from="Detection_Are" to="." method="_on_detection_are_body_entered"]
-[connection signal="body_exited" from="Detection_Are" to="." method="_on_detection_are_body_exited"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
-[connection signal="area_entered" from="SlimeHitbox" to="." method="_on_slime_hitbox_area_entered"]
-[connection signal="body_entered" from="SlimeDealDamageZone" to="." method="_on_slime_deal_damage_zone_body_entered"]
-[connection signal="body_exited" from="SlimeDealDamageZone" to="." method="_on_slime_deal_damage_zone_body_exited"]
-[connection signal="body_entered" from="Too_Close" to="." method="_on_area_2d_body_entered"]
-[connection signal="body_exited" from="Too_Close" to="." method="_on_area_2d_body_exited"]

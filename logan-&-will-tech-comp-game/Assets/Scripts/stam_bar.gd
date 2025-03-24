@@ -23,4 +23,5 @@ func init_stam(_stam):
 	
 
 func _on_timer_timeout() -> void:
+	await get_tree().create_timer(0.1).timeout
 	stamDepletion.value = stam

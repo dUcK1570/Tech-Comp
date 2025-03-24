@@ -16,8 +16,8 @@ var str = 10
 var vig = 10
 var vit = 10
 var wis = 10
-var regen = (vit/2)
-var stamregen = (vit/0.75)
+var regenwait = (vit/25)
+var stamregenwait = (vit/50)
 
 #slime enemy
 var slimecanhit: bool

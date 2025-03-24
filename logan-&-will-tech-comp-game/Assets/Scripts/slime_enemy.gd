@@ -86,7 +86,7 @@ func handle_animation():
 
 func handledeath():
 	Globals.xp += 1
-	self.queue_free()
+
 
 func _on_timer_timeout() -> void:
 	$Timer.wait_time = choose([2.0, 2.5, 3])
@@ -118,6 +118,8 @@ func take_damage(damage):
 		health = 0
 		dead = true
 		Globals.level_up()
+		self.queue_free()
+		handledeath()
 	print(str(self), "current health is", health)
 
 func _on_area_2d_body_entered(body: Node2D) -> void:

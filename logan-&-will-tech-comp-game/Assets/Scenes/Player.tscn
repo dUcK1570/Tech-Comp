@@ -1,16 +1,72 @@
-[gd_scene load_steps=8 format=3 uid="uid://c2shfrdn1qhv5"]
+[gd_scene load_steps=16 format=3 uid="uid://c2shfrdn1qhv5"]
 
 [ext_resource type="Texture2D" uid="uid://5016njrev5qi" path="res://Assets/Sprites/Person.png" id="1_3e2tf"]
 [ext_resource type="Script" uid="uid://bj11e55qauhe5" path="res://Assets/Scenes/player_controller.gd" id="1_b2ifw"]
+[ext_resource type="Texture2D" uid="uid://bbr1q65tsgjuo" path="res://Assets/Sprites/Sword.png" id="2_mifcl"]
 [ext_resource type="PackedScene" uid="uid://bh75s6sk7bn7e" path="res://Assets/Scenes/Biome Functionality/HealthBar.tscn" id="3_aee6e"]
 [ext_resource type="PackedScene" uid="uid://bxv0m2g4lk17h" path="res://Assets/Scenes/Biome Functionality/stam_bar.tscn" id="4_e5q2x"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mifcl"]
+atlas = ExtResource("2_mifcl")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2thea"]
+atlas = ExtResource("2_mifcl")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jqe1p"]
+atlas = ExtResource("2_mifcl")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n6g26"]
+atlas = ExtResource("2_mifcl")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_twodr"]
+atlas = ExtResource("2_mifcl")
+region = Rect2(0, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y63lr"]
+atlas = ExtResource("2_mifcl")
+region = Rect2(0, 128, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jjopo"]
+animations = [{
+"frames": [{
+"duration": 0.01,
+"texture": SubResource("AtlasTexture_mifcl")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2thea")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jqe1p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n6g26")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_twodr")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_y63lr")
+}],
+"loop": false,
+"name": &"slice",
+"speed": 15.0
+}]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_b2ifw"]
 radius = 6.0
 height = 14.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b2ifw"]
-size = Vector2(24.197, 10.2317)
+size = Vector2(24.197, 13.1505)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_aee6e"]
 radius = 6.0
@@ -26,12 +82,17 @@ speed = 6.0
 offset = Vector2(0, -10)
 zoom = Vector2(5, 5)
 
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -18)
+scale = Vector2(0.84375, 1.0625)
+sprite_frames = SubResource("SpriteFrames_jjopo")
+animation = &"slice"
+offset = Vector2(16, 0)
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-0.06, -7.5)
 scale = Vector2(0.0202041, 0.00722222)
 texture = ExtResource("1_3e2tf")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -7)
@@ -40,12 +101,10 @@ shape = SubResource("CapsuleShape2D_b2ifw")
 [node name="dealDamageZone" type="Area2D" parent="."]
 
 [node name="damagecollision" type="CollisionShape2D" parent="dealDamageZone"]
-position = Vector2(14, -10)
+position = Vector2(13.3832, -11.3226)
 rotation = -0.436332
 shape = SubResource("RectangleShape2D_b2ifw")
 disabled = true
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 
 [node name="PlayerHitbox" type="Area2D" parent="."]
 collision_layer = 2

@@ -10,7 +10,7 @@ class_name PlayerController
 var stam: int
 var max_stam = 100
 var can_take_damage: bool
-var health: int
+var health: float
 var speed_multiplier = 30.0
 var jump_multiplier = -30.0
 var direction = 0
@@ -18,6 +18,10 @@ var dead: bool
 var current_attack: bool
 var attack_type: String
 const gravity = 900
+var regentimer = 0
+var jumped = false
+var stamtimer = 0
+
 
 func _ready():
 	health = 100
@@ -33,13 +37,51 @@ func _ready():
 func _physics_process(delta: float) -> void:
 	Globals.playerDamageSword = ((Globals.str)-3)*1.75
 	Globals.playerDamageZone = deal_damage_zone
+	if can_take_damage and !current_attack:
+		await get_tree().create_timer(0.1).timeout
+		regentimer += 1
+	elif !can_take_damage or current_attack:
+		regentimer = 0
+	if regentimer >= 100:
+		if health < 100:
+			health += 0.25
+			healthbar.health = health
+		if health > 100:
+			health = 100
+			healthbar.health = health
+		if health <= 0:
+			health = 0
+			healthbar.health = health
+		if is_inside_tree():
+			await get_tree().create_timer(Globals.regenwait).timeout
+	if jumped:
+		stamtimer = 0
+	if !current_attack:
+		if is_inside_tree():
+			await get_tree().create_timer(0.1).timeout
+		stamtimer += 1
+	elif current_attack:
+		stamtimer = 0
+	if stamtimer >= 60:
+		if stam < 100:
+			stam += 1
+		if stam > 100:
+			stam = 100
+		if stam <= 0:
+			stam = 0
+		if is_inside_tree():
+			await get_tree().create_timer(Globals.stamregenwait).timeout
+	stambar.stam = stam
 	if not is_on_floor():
 		velocity.y += gravity * delta
 	if !dead:
 		if Input.is_action_just_pressed("jump") and is_on_floor() and stam >= 5:
 			velocity.y = jump_power * jump_multiplier
+			jumped = true
 			stam -= 5
 			stambar.stam = stam
+			await get_tree().create_timer(0.01).timeout
+			jumped = false
 		direction = Input.get_axis("move_left", "move_right")
 		toggle_flip_sprite(direction)
 		if direction:
@@ -47,12 +89,14 @@ func _physics_process(delta: float) -> void:
 		else:
 			velocity.x = move_toward(velocity.x, 0, speed * speed_multiplier)
 		if !current_attack:
+			$AnimatedSprite2D2.play("idle")
 			if Input.is_action_just_pressed("left_mouse") or Input.is_action_just_pressed("right_mouse"):
 				if Input.is_action_just_pressed("left_mouse") and stam >= 20:
 					stam -= 20
 					stambar.stam = stam
 					attack_type = "slice"
-					toggle_damage_collisions(attack_type)
+					current_attack = true
+				handle_attack_animation(attack_type)
 				set_damage(attack_type)
 	
 		checkHitbox()
@@ -64,19 +108,24 @@ func _physics_process(delta: float) -> void:
 func toggle_flip_sprite(direction):
 	if direction == 1:
 		deal_damage_zone.scale.x = 1
+		$Sprite2D.scale.x = 0.02
+		$AnimatedSprite2D2.scale.x = 1
 	if direction == -1:
 		deal_damage_zone.scale.x = -1
+		$Sprite2D.scale.x = -0.02
+		$AnimatedSprite2D2.scale.x = -1
 func handle_attack_animation(attack_type):
 	if current_attack:
 		var animation = str(attack_type)
-		animated_sprite.play(animation)
-		#toggle_damage_collisions(attack_type)
+		$AnimatedSprite2D2.play(animation)
+		toggle_damage_collisions(attack_type)
+
 
 func toggle_damage_collisions(attack_type):
 	var damage_zone_collision = deal_damage_zone.get_node("damagecollision")
 	var wait_time: float
 	if attack_type == "slice":
-		wait_time = 0.8
+		wait_time = 0.5
 	#elif attack_type == "spell1":
 		#wait_time == 0.8
 	damage_zone_collision.disabled = false
@@ -122,21 +171,21 @@ func invincibility(wait_time):
 	can_take_damage = false
 	await get_tree().create_timer(wait_time).timeout
 	can_take_damage = true
+#
+#func _on_regen_timer_timeout() -> void:
+	#if health < 100:
+		#health += Globals.regen*2
+	#if health > 100:
+		#health = 100
+	#if health <= 0:
+		#health = 0
+	#healthbar.health = health
 
-func _on_regen_timer_timeout() -> void:
-	if health < 100:
-		health += Globals.regen*2
-	if health > 100:
-		health = 100
-	if health <= 0:
-		health = 0
-	healthbar.health = health
-
-func _on_stam_regen_timer_timeout() -> void:
-	if stam < 100:
-		stam += Globals.stamregen*2
-	if stam > 100:
-		stam = 100
-	if stam <= 0:
-		stam = 0
-	stambar.stam = stam
+#func _on_stam_regen_timer_timeout() -> void:
+	#if stam < 100:
+		#stam += Globals.stamregen*2
+	#if stam > 100:
+		#stam = 100
+	#if stam <= 0:
+		#stam = 0
+	#stambar.stam = stam

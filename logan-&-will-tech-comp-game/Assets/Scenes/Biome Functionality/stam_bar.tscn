@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://bxv0m2g4lk17h"]
 
-[ext_resource type="Script" uid="uid://jyxjiiq2tlol" path="res://Assets/Scripts/stam_bar.gd" id="1_5aski"]
+[ext_resource type="Script" uid="uid://jyxjiiq2tlol" path="res://Scripts/stam_bar.gd" id="1_5aski"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5aski"]
 

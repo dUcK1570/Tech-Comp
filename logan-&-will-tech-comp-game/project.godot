@@ -20,8 +20,8 @@ run/layer_17=""
 
 [autoload]
 
-GameManager="*res://Assets/Scripts/game_manager.gd"
-Globals="*res://Assets/Scripts/globals.gd"
+GameManager="*res://Scripts/game_manager.gd"
+Globals="*res://Scripts/globals.gd"
 
 [input]
 

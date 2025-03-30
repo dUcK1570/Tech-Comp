@@ -96,13 +96,13 @@ func _physics_process(delta: float) -> void:
 					stambar.stam = stam
 					attack_type = "slice"
 					current_attack = true
+				#elif Input.is_action_just_pressed("right_mouse"):
+					#attack_type = "spell1"
 				handle_attack_animation(attack_type)
 				set_damage(attack_type)
 	
 		checkHitbox()
-			#elif Input.is_action_just_pressed("right_mouse"):
-				#attack_type = "spell1"
-				#toggle_damage_collisions(attack_type)
+			
 	move_and_slide()
 	
 func toggle_flip_sprite(direction):

@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://0e1d040p5k3u"]
 
 [ext_resource type="PackedScene" uid="uid://fgwk3nqhhaxp" path="res://Assets/Scenes/Biome Functionality/Forest - Functionality.tscn" id="1_iy3h7"]
-[ext_resource type="Script" uid="uid://bjyyryfrl8ne4" path="res://Assets/Scripts/area_1.gd" id="2_ctmkh"]
+[ext_resource type="Script" uid="uid://bjyyryfrl8ne4" path="res://Scripts/area_1.gd" id="2_ctmkh"]
 [ext_resource type="PackedScene" uid="uid://mwx3s71xuea2" path="res://Assets/Entities/enemy.tscn" id="3_ctmkh"]
 
 [node name="forest_1" instance=ExtResource("1_iy3h7")]

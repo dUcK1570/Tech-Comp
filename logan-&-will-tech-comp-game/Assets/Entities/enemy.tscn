@@ -1,6 +1,6 @@
 [gd_scene load_steps=38 format=3 uid="uid://mwx3s71xuea2"]
 
-[ext_resource type="Script" uid="uid://b5aus4j0agh7u" path="res://Assets/Scripts/slime_enemy.gd" id="1_lim66"]
+[ext_resource type="Script" uid="uid://b5aus4j0agh7u" path="res://Scripts/slime_enemy.gd" id="1_lim66"]
 [ext_resource type="Texture2D" uid="uid://v3gxnwkjw2ux" path="res://Assets/Sprites/Slime Spritesheet.png" id="1_ncgdw"]
 [ext_resource type="PackedScene" uid="uid://bh75s6sk7bn7e" path="res://Assets/Scenes/Biome Functionality/HealthBar.tscn" id="3_h8b60"]
 

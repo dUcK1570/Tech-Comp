@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://4ktoewqfi0yb"]
+
+[ext_resource type="Script" uid="uid://r2nqvxyfljus" path="res://ManaBar.gd" id="1_4wgms"]
+
+[node name="ManaBar" type="ProgressBar"]
+offset_right = 4.0
+offset_bottom = 27.0
+value = 60.0
+show_percentage = false
+script = ExtResource("1_4wgms")
+
+[node name="ManaDepletion" type="ProgressBar" parent="."]
+layout_mode = 0
+offset_right = 4.0
+offset_bottom = 27.0
+value = 80.0
+show_percentage = false
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
